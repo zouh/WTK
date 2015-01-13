@@ -42,7 +42,8 @@ class API < Grape::API
 
   mount WTK::Organizations
 
-  add_swagger_documentation mount_path: '/docs' #,
+  add_swagger_documentation mount_path: '/docs' 
+                            #,
                             # base_path: lambda { |request| "http://#{request.host}:#{request.port}" },
                             # markdown: GrapeSwagger::Markdown::KramdownAdapter unless Rails.env.production?
 end
