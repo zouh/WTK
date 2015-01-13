@@ -1,0 +1,69 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="form-group">
+  <%= f.label :name, '名称：', class: "control-label" %>
+  <%= f.text_field :name, class: "form-control" %>
+
+  <%= f.label :description, '描述：', class: "control-label" %>
+  <%= f.text_area :description, rows: 10, class: "form-control" %>
+
+  <%= f.label :image_url, ' 图片：', class: "control-label" %>
+  <%= f.text_field :image_url, class: "form-control" %>
+
+  <%= f.label :price, '现价：', class: "control-label" %>
+  <%= f.text_field :price, class: "form-control" %>
+
+  <%= f.label :retail, '零售价：', class: "control-label" %>
+  <%= f.text_field :retail, class: "form-control" %> 
+
+  <%= f.label :wholesale, '加盟价：', class: "control-label" %>
+  <%= f.text_field :wholesale, class: "form-control" %>
+  
+  <%= f.check_box :qualify %>
+  <%= f.label :qualify, '通过购买此商品获得加盟资格', class: "control-label" %>
+
+  <br><br>
+
+  <%= f.label :rate1, '积分计提：', class: "control-label" %> 	
+  <table class="table table-striped table-bordered">
+    <tr> 
+      <th>等级间隔</th>
+      <th>计提百分比<br>（ ％ ）</th>
+    </tr> 
+  
+    <tr> 
+      <td>天使特权（基于加盟价）</td>
+      <td><%= f.text_field :rate0, class: "form-control" %></td>
+    </tr>
+
+    <tr> 
+      <td>1 级</td>
+      <td><%= f.text_field :rate1, class: "form-control" %></td>
+    </tr>
+
+    <tr> 
+      <td>2 级</td>
+      <td><%= f.text_field :rate2, class: "form-control" %></td>
+    </tr>
+
+    <tr> 
+      <td>3 级</td>
+      <td><%= f.text_field :rate3, class: "form-control" %></td>
+    </tr>
+  <!--	
+    <tr> 
+      <td>4 级</td>
+      <td><%= f.text_field :rate4, class: "form-control" %></td>
+    </tr>
+
+    <tr> 
+      <td>5 级</td>
+      <td><%= f.text_field :rate5, class: "form-control" %></td>
+    </tr>
+  -->
+    <tr> 
+      <td>金牌会员特权（基于实际消费额）</td>
+      <td><%= f.text_field :rate6, class: "form-control" %></td>
+    </tr>
+  </table>
+</div>

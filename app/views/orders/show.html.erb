@@ -1,0 +1,46 @@
+<% provide(:title, '订单') %>
+<h1>订单</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@order) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+		<div class="row">
+		  <table class="table table-striped">
+			<tr>
+			  <th>商品</th>
+			  <th></th>
+			  <th>数量</th>
+			  <th>单价</th>
+			  <th>总价</th>
+			</tr>
+			<tbody>
+			  <% @order.line_items.each do |line_item| %>
+				<tr>
+				  <td><%= line_item.product.name %></td>
+				  <td>&times;</td>
+				  <td><%= line_item.quantity %></td>
+				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.product.price, unit: '¥') %></td>	  
+				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.total_price, unit: '¥') %></td>
+				</tr> 
+			  <% end %>
+			  <tr>
+				<th>总计：</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th><%= number_to_currency(@order.total, unit: '¥') %></th>
+			  </tr>
+			</tbody>   
+		  </table>
+		</div>
+
+		<div class="row">
+		  <div class="col-lg-5 col-lg-offset-1">
+		  	<strong>订购人：</strong>
+		    <%= @order.created_by_user.name %>
+		  </div>
+		</div>
+    <% end %>
+  </div>
+</div>

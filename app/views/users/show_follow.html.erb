@@ -1,0 +1,50 @@
+<% provide(:title, @title) %>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+    <section>
+      <%= render 'shared/user_stats' %>
+      <% if @members.any? %>
+        <div class="user_avatars">
+          <% @members.each do |member| %>
+            <%= link_to gravatar_for(member.user, size: 32), member.user %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </aside>
+
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <table class="table table-striped">
+      <tr>
+        <th></th>
+        <th>姓名</th>
+        <th>帐号</th>
+        <th>级差</th>
+        <th>订单金额</th>
+        <th>积分</th>
+      </tr>
+      <% if @members.any? %>
+        <tbody>
+          <ul class="members">
+            <% @members.each do |member| %>
+              <tr>
+                <td><%= gravatar_for(member.user) %></td>
+                <td><%= member.user.nil? ? '' : member.name %></td>
+                <td><%= member.user.nil? ? '' : member.user.email %></td>
+                <td><%= member.depth - @user.member.depth %></td>
+                <td></td>
+                <td></td>
+              </tr>
+            <% end %>
+          </ul>
+        </tbody>
+      <% end %>     
+    </table>
+    <%= will_paginate(@members, previous_label: '上一页', next_label: '下一页') %>
+  </div>
+</div>

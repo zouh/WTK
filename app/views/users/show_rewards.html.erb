@@ -1,0 +1,43 @@
+<% provide(:title, @title) %>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+    <section>
+      <%= render 'shared/user_stats' %>
+    </section>
+  </aside>
+
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <table class="table table-striped">
+      <tr>
+        <th>订购时间</th>
+        <th>订单号</th>
+        <th>订购人</th>
+        <th>总金额</th>
+        <th>积分比例</th>
+        <th>积分</th>
+      </tr>
+      <% if @rewards.any? %>
+        <tbody>
+          <ul class="rewards">
+            <% @rewards.each do |reward| %>
+              <tr>
+                <td><%= reward.created_at.strftime("%Y-%-m-%-d") %></td>
+                <td><%= link_to reward.order.id.to_s, reward.order %> 号订单</td>
+                <td><%= reward.created_by_user.name %></td>
+                <td><%= number_to_currency(reward.amount, unit: '¥') %></td>
+                <td><%= reward.rate.to_s + ' %' %></td>
+                <td><%= reward.points.to_i %></td>
+              </tr>
+            <% end %>
+          </ul>
+        </tbody>
+      <% end %>     
+    </table>
+    <%= will_paginate(@rewards, previous_label: '上一页', next_label: '下一页') %>
+  </div>
+</div>

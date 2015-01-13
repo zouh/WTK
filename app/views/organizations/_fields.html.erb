@@ -1,0 +1,25 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="form-group">
+	<%= f.label :name, '名称：', class: "control-label" %>
+	<%= f.text_field :name, readonly: !current_user.admin?, class: "form-control" %>
+
+	<%= f.label :contract, '合同号：', class: "control-label" %>
+	<%= f.text_field :contract, readonly: !current_user.admin?, class: "form-control" %>
+
+	<%= f.label :invite_code, '群管理员邀请码：', class: "control-label" %>
+	<%= f.text_field :invite_code, readonly: true, class: "form-control" %>
+
+	<% if !current_user.admin? && current_member.master? %>
+
+		<%= f.label :logo_url, 'Logo 地址：', class: "control-label" %>
+		<%= f.text_field :logo_url, class: "form-control" %>
+
+		<%= f.label :capacity, '天使推客总数上限（100 — 5000 人）：', class: "control-label" %>
+		<%= f.text_field :capacity, value: 100, class: "form-control" %>
+
+		<%= f.label :period, '积分计算周期：', class: "control-label" %>
+		<%= f.select :period, options_for_select({'天' => 1, '周' => 2, '月' => 3, '季度' => 4, '半年' => 5, '年' => 6}, 3) %>
+		
+	<% end %>
+ </div>

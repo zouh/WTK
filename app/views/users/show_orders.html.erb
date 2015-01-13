@@ -1,0 +1,54 @@
+<% provide(:title, @title) %>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+    <section>
+      <%= render 'shared/user_stats' %>
+    </section>
+  </aside>
+
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <table class="table table-striped">
+      <tr>
+        <th>订购时间</th>
+        <th>订单/商品</th>
+        <th></th>
+        <th>数量</th>
+        <th>单价</th>
+        <th>总价/总金额</th>
+      </tr>
+      <% if @orders.any? %>
+        <tbody>
+          <ul class="orders">
+            <% @orders.each do |order| %>
+              <tr>
+                <td><strong><%= order.created_at.strftime("%Y-%-m-%-d") %></strong></td>
+                <td><strong><%= link_to order.id.to_s, order %> 号订单</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong><%= number_to_currency(order.total, unit: '¥') %></strong></td>
+              </tr>
+              <% order.line_items.each do |line_item| %>
+                <tr>
+                  <td></td>
+                  <td><%= line_item.product.name %></td>
+                  <td>&times;</td>
+                  <td><%= line_item.quantity %></td>
+                  <td class="item_price">&nbsp;<%= number_to_currency(line_item.product.price, unit: '¥') %></td>   
+                  <td class="item_price">&nbsp;<%= number_to_currency(line_item.total_price, unit: '¥') %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </ul>
+        </tbody>
+      <% end %>     
+    </table>
+    <%= will_paginate(@orders, previous_label: '上一页', next_label: '下一页') %>
+  </div>
+</div>
+

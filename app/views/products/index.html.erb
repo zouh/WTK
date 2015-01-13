@@ -1,0 +1,18 @@
+<% provide(:title, '商品列表') %>
+<h1>商品列表</h1>
+
+<%= will_paginate previous_label: '上一页', next_label: '下一页' %>
+<table class="table table-striped">
+  <tbody>
+	<ul class="products">
+	  <%= render @products %>
+	</ul>
+  </tbody>
+</table>
+<%= will_paginate previous_label: '上一页', next_label: '下一页' %>
+<% if !current_user.admin? && current_member.master? %>
+  <p><%= link_to '新增', new_product_path %></p>
+<% end %>
+
+
+

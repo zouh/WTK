@@ -1,0 +1,50 @@
+<% provide(:title, @organization.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <a href="<%= edit_organization_path(@organization) %>">
+        <%= logo_for(@organization, size: '80') %>
+      </a>
+      <h1>
+        <%= @organization.name %>
+      </h1>
+      <span>
+        <%= link_to "修改群设置", edit_organization_path(@organization) %>
+      </span>
+    </section> 
+    <section>
+      <%= render 'stats' %>
+    </section> 
+    <section>
+      <span>销售收入：<%= number_to_currency(@organization.sales_total, unit: '¥') %></span>
+    </section>  
+     
+  </aside>
+
+  <div class="col-md-8">
+    <h3>最近销售</h3>
+    <table class="table table-striped">
+      <tr>
+        <th>订购时间</th>
+        <th>订单</th>
+        <th>会员</th>
+        <th>总金额</th>
+      </tr>
+      <% if @organization.orders.any? %>
+        <tbody>
+          <ul class="orders">
+            <% @organization.orders.each do |order| %>
+              <tr>
+                <td><%= order.created_at.strftime("%Y-%-m-%-d") %></td>
+                <td><%= link_to order.id.to_s, order %> 号订单</td>
+                <td><%= order.member.name %></td>
+                <td><strong><%= number_to_currency(order.total, unit: '¥') %></strong></td>
+              </tr>
+            <% end %>
+          </ul>
+        </tbody>
+      <% end %>     
+    </table>
+  </div>
+</div>
+	

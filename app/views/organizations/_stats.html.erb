@@ -1,0 +1,35 @@
+<% @organization ||= current_user.member.organization %>
+<div class="stats">
+  <% if @organization.aviliible_invite_codes.count > 0 %>
+    <a href="<%= aviliible_invite_codes_organization_path(@organization) %>">
+      <strong id="angels" class="stat">
+        <%= @organization.aviliible_invite_codes.count %>
+      </strong>
+      天使邀请码
+    </a>
+  <% end %>
+  <a href="<%= angels_organization_path(@organization) %>">
+    <strong id="angels" class="stat">
+      <%= @organization.registered_angels.count %>
+    </strong>
+    天使
+  </a>
+  <a href="<%= partners_organization_path(@organization) %>">
+    <strong id="partners" class="stat">
+      <%= @organization.registered_partners.count %>
+    </strong>
+    伙伴
+  </a>
+  <a href="<%= vips_organization_path(@organization) %>">
+    <strong id="vips" class="stat">
+      <%= @organization.registered_vips.count %>
+    </strong>
+    金牌会员
+  </a>
+  <a href="<%= members_organization_path(@organization) %>">
+    <strong id="members" class="stat">
+      <%= @organization.registered_members.count %>
+    </strong>
+    会员
+  </a>
+</div>

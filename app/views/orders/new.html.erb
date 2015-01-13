@@ -1,0 +1,51 @@
+<% provide(:title, '订单') %>
+<h1>核对并提交订单</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@order) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+		<div class="row">
+		  <table class="table table-striped">
+			<tr>
+			  <th>商品</th>
+			  <th></th>
+			  <th>数量</th>
+			  <th>单价</th>
+			  <th>总价</th>
+			</tr>
+			<tbody>
+			  <% @cart.line_items.each do |line_item| %>
+				<tr>
+				  <td><%= line_item.product.name %></td>
+				  <td>&times;</td>
+				  <td><%= line_item.quantity %></td>
+				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.product.price, unit: '¥') %></td>	  
+				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.total_price, unit: '¥') %></td>
+				</tr> 
+			  <% end %>
+			  <tr>
+				<th>总计：</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th><%= number_to_currency(@cart.total_price, unit: '¥') %></th>
+			  </tr>
+			</tbody>   
+		  </table>
+		</div>
+
+		<div class="row">
+		  <div class="col-lg-2">
+		    <strong>订购人：</strong>
+		  </div>
+		  <div class="col-lg-3">
+		    <%= @order.created_by_user.name %>
+		  </div>
+		  <div class="col-lg-3 col-lg-offset-4">
+		    <%= f.submit "提交订单", class: "btn btn-large btn-primary" %>
+		  </div>
+		</div>
+    <% end %>
+  </div>
+</div>

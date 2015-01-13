@@ -1,0 +1,18 @@
+<% unless cart.line_items.empty? %>
+  <div class="cart_title">我的购物车 <i class="fa fa-shopping-cart fa-lg"></i></div> 
+
+  <table>
+    <%= render(cart.line_items) %>
+
+    <tr class="total_line">
+      <td colspan="2">总计：</td>
+      <td></td>
+      <td class="total_cell"><%= number_to_currency(cart.total_price, unit: '¥') %></td>
+    </tr>
+  </table>
+  <div class="cart_line">
+    <%= button_to '提交订单', new_order_path, class: "btn btn-danger btn-xs", method: :get %>
+    <span>&nbsp;&nbsp;</span>
+    <%= button_to '清空购物车', cart, class: "btn btn-warning btn-xs", method: :delete, data: { confirm: '确定要清空购物车吗？' } %>
+  </div>
+<% end %>

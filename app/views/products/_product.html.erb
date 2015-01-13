@@ -1,0 +1,23 @@
+<tr>
+  <td><%= image_for(product) %></td>
+  <td>
+    <dl>
+      <dt><%= link_to product.name, product %></dt>
+      <dd><%= truncate(strip_tags(product.description), length: 200) %></dd>
+      <% if current_user.admin? %>
+        <br><br>
+        <dt><%= link_to product.organization.name, product.organization %></dt>
+      <% end %>
+    </dl>
+  </td>
+  <td>零售价：<%= number_to_currency(product.retail, unit: '¥') %></td>
+  <td>加盟价：<%= number_to_currency(product.wholesale, unit: '¥') %></td>
+  
+  <% if (current_user.admin? || current_member.master?) %>
+    <td>
+      <%= link_to '查看', product_path(product) %><br>
+      <%= link_to '编辑', edit_product_path(product) %><br>
+      <%= link_to '删除', product_path(product), method: :delete, data: { confirm: '确定删除吗？' } %>
+    </td>
+  <% end %>
+</tr>

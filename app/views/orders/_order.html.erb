@@ -1,0 +1,12 @@
+<tr>
+  <td></td>
+  <td><%= order.created_at.strftime("%Y-%-m-%-d") %></td>
+  <td><%= order.id %></td>
+  <td><%= order.member.name %></td>
+  <td><%= number_to_currency(order.total, unit: '¥') %></td>
+  <td>
+    <%= link_to '查看', order_path(order) %><br>
+    <%= link_to '编辑', edit_order_path(order) %><br>
+    <%= link_to '删除', order_path(order), method: :delete, data: { confirm: '确定删除吗？' } %>
+  </td>
+</tr>

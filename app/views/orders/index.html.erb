@@ -1,0 +1,22 @@
+<% provide(:title, '订单列表') %>
+<h1>订单列表</h1>
+
+<%= will_paginate previous_label: '上一页', next_label: '下一页' %>
+<table class="table table-striped">
+  <tr>
+    <th>全选</th>
+    <th>订购时间</th>
+    <th>订单号</th>
+    <th>订购人</th>
+    <th>总金额</th>
+    <th></th>
+  </tr>
+  <tbody>
+	  <ul class="orders">
+	    <%= render @orders %>
+	  </ul>
+  </tbody>
+</table>
+<%= will_paginate previous_label: '上一页', next_label: '下一页' %>
+
+

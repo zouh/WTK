@@ -1,0 +1,11 @@
+<li id="<%= catalog_item.id %>">
+  <%= link_to image_for(catalog_item, size: '70'), catalog_item %>
+    <h3>
+      <%= link_to catalog_item.name, catalog_item %>
+    </h3>
+    <span class="content"><%= sanitize(catalog_item.description) %><br></span>
+    <div class="price_line">
+      <span class="price"><%= number_to_currency(catalog_item.price, unit: '¥') %></span>
+      <%= button_to '加入购物车', line_items_path(product_id: catalog_item), class: "btn btn-warning btn-xs", remote: true %>
+    </div>
+</li>

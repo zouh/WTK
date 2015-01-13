@@ -1,0 +1,23 @@
+<% @user ||= current_user %>
+<div class="stats">
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers" class="stat">
+      <%= @user.member.followers.count %>
+    </strong>
+    粉丝
+  </a>
+
+  <a href="<%= rewards_user_path(@user) %>">
+    <strong id="rewards" class="stat">
+      <%= @user.member.rewards.count %>
+    </strong>
+    积分
+  </a>
+
+  <a href="<%= orders_user_path(@user) %>">
+    <strong id="orders" class="stat">
+      <%= @user.member.orders.count %>
+    </strong>
+    订单
+  </a>
+</div>

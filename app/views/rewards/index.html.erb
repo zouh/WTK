@@ -1,0 +1,24 @@
+<% provide(:title, '返利列表') %>
+<h1>返利列表</h1>
+
+<%= will_paginate previous_label: '上一页', next_label: '下一页' %>
+<table class="table table-striped">
+  <tr>
+    <th>收款日期</th>
+    <th>付款人</th>
+    <th>受益人</th>
+    <th>订单号</th>
+    <th>行号</th>
+    <th>总金额</th>
+    <th>比例</th>
+    <th>返利</th>
+  </tr>
+  <tbody>
+	  <ul class="rewards">
+	    <%= render @rewards %>
+	  </ul>
+  </tbody>
+</table>
+<%= will_paginate previous_label: '上一页', next_label: '下一页' %>
+
+

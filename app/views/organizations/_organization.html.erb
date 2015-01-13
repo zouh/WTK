@@ -1,0 +1,15 @@
+<tr>
+  <td><%= logo_for(organization) %></td>
+  <td><%= link_to organization.name, organization %></td>
+  <td><%= organization.contract %></td>
+  <td><%= organization.invite_code %></td>
+  <td><%= link_to organization.members[0].name, organization.members[0].user unless organization.members[0].user.nil? %></td>
+  <td><%= organization.members.where('user_id is not null and parent_id is not null').count %></td>
+  <td></td>
+  <td><%= organization.created_at.strftime("%Y-%-m-%-d") %> </td>
+  <td>
+    <%= link_to '查看', organization_path(organization) %><br>
+    <%= link_to '编辑', edit_organization_path(organization) %><br>
+    <%= link_to '删除', organization_path(organization), method: :delete, data: { confirm: '确定删除吗？' } %>
+  </td>
+</tr>

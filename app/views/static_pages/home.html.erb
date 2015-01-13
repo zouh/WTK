@@ -1,0 +1,12 @@
+<% if signed_in? %>
+  <%= render current_user %>
+<% else %>
+  <div class="center hero-unit">
+    <h1>欢迎使用绿尚客</h1>
+    <%= link_to image_tag("gfa8lr.jpg", alt: "微推客"), 'http://www.gfa8.cn/' %>
+    <h2>
+      加入<a href="http://www.gfa8.com.cn/">绿尚客</a>，踏上精彩的连锁营销之路！
+    </h2>
+    <%= link_to "马上注册!", signup_path, class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>

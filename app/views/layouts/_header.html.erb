@@ -1,0 +1,40 @@
+<header class="navbar navbar-fixed-top navbar-default">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "绿尚客", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav nav-pills">
+          <% if signed_in? %>
+            <% if current_user.admin? %>
+              <li><%= link_to "推客群列表", organizations_path %></li>
+              <li><%= link_to "推客列表", users_path %></li>
+              <li><%= link_to "商品列表", products_path %></li>
+            <% elsif current_member.master? %>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  推客群 <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "查看", current_user.member.organization %></li>
+                  <li><%= link_to "设置", edit_organization_path(current_user.member.organization) %></li>
+                </ul>
+              </li>
+              <li><%= link_to "推客列表", users_path %></li> 
+              <li><%= link_to "商品列表", products_path %></li>
+              <li><%= link_to "订单列表", orders_path %></li> 
+              <li><%= link_to "返利列表", rewards_path %></li>  
+            <% else %>
+              <li><%= link_to "商品", root_path %></li>
+            <% end %>
+            <li><%= link_to "我的帐号", edit_user_path(current_user) %></li>
+            <li><%= link_to "退出", signout_path, method: "delete" %></li>
+            </li>
+          <% else %>
+            <li><%= link_to "登录", signin_path %></li>
+          <% end %>
+          <li><%= link_to "帮助", help_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

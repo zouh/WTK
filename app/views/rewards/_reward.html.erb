@@ -1,0 +1,10 @@
+<tr>
+  <td><%= reward.created_at.strftime("%Y-%-m-%-d") %></td>
+  <td><%= reward.created_by_user.name %></td>
+  <td><%= reward.member.name %></td>
+  <td><%= reward.order_id %></td>
+  <td><%= reward.line_item_id %></td>
+  <td><%= number_to_currency(reward.amount, unit: '¥') %></td>
+  <td><%= reward.rate.to_s + ' %' %></td>
+  <td><%= number_to_currency(reward.points, unit: '¥') %></td>
+</tr>
