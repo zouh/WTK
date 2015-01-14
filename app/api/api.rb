@@ -35,12 +35,8 @@ class API < Grape::API
       }.to_json, 500).finish
   end
 
-  mount WTK::Ping
-  #mount WTK::Raise
-  #mount WTK::Protected
-  mount WTK::Post
-
   mount WTK::Organizations
+  mount WTK::Users
 
   add_swagger_documentation mount_path: '/docs' 
                             #,
