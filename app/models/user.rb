@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
   #default_scope { order('organization_id').order('name') }
   scope :by_organization, ->(org_id) {joins(:member).where("members.organization_id" => org_id).order('depth').order('name')} 
 
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost) 
+  end
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

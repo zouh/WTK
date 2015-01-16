@@ -1,5 +1,5 @@
 module WTK
-  class Organizations < Grape::API
+  class OrgAPI < Grape::API
 
     resource :organizations do
 

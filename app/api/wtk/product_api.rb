@@ -1,5 +1,22 @@
 module WTK
-  class Products < Grape::API
+
+  module Entities
+    
+    class Product < Grape::Entity
+      format_with(:iso_timestamp) { |dt| dt.iso8601 }
+        expose :oid
+        expose :name
+        expose :description, documentation: { type: "String", desc: "产品描述." }
+        expose :retail
+        
+        with_options(format_with: :iso_timestamp) do
+          expose :created_at
+          expose :updated_at
+        end
+    end
+  end
+
+  class ProductAPI < Grape::API
 
     resource :products do
 
@@ -30,7 +47,8 @@ module WTK
       
       desc "列出全部商品"
       get do
-        Product.where(organization_id: 2)
+        # Product.where(organization_id: 2)
+        present Product.where(organization_id: 2), :with => Entities::Product
       end
 
 
@@ -91,6 +109,5 @@ module WTK
 
     end
   end
-
 end
 

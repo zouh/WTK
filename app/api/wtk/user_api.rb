@@ -1,5 +1,5 @@
 module WTK
-  class Users < Grape::API
+  class UserAPI < Grape::API
 
     resource :users do
 
@@ -16,7 +16,7 @@ module WTK
         User.create!(
                       oid:          params[:id],
                       name:         params[:name],
-                      avatar:       params[:avatar], 
+                      avatar_url:   params[:avatar], 
                       email:        params[:email], 
                       phone:        params[:phone],
                       password:     "123456",
@@ -74,7 +74,7 @@ module WTK
           error!('未找到指定的用户', 404)
         end 
         #authenticate!
-        @user.destroy
+        @user.destroy!
       end
 
     end

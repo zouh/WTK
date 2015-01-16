@@ -35,9 +35,9 @@ class API < Grape::API
       }.to_json, 500).finish
   end
 
-  mount WTK::Organizations
-  mount WTK::Users
-  mount WTK::Products
+  mount WTK::OrgAPI
+  mount WTK::UserAPI
+  mount WTK::ProductAPI
 
   add_swagger_documentation mount_path: '/docs' 
                             #,
