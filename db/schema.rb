@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20141010012217) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.string   "avatar"
+    t.string   "avatar_url"
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
