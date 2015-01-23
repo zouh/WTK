@@ -17,7 +17,7 @@ module WTK
   end
 
 
-  class UserAPI < Grape::API
+  class Users < Grape::API
 
     resource :users do
 

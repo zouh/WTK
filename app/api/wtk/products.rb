@@ -4,9 +4,9 @@ module WTK
     
     class Product < Grape::Entity
       format_with(:iso_timestamp) { |dt| dt.iso8601 }
-        expose :oid
+        expose :oid, as: :id
         expose :name
-        expose :description, documentation: { type: "String", desc: "产品描述." }
+        expose :description, documentation: { type: "String", desc: "商品描述" }
         expose :retail
         
         with_options(format_with: :iso_timestamp) do
@@ -16,7 +16,7 @@ module WTK
     end
   end
 
-  class ProductAPI < Grape::API
+  class Products < Grape::API
 
     resource :products do
 
@@ -31,7 +31,7 @@ module WTK
         requires :wholesale, type: String, desc: "商品加盟价格"
       end
       post do
-        Product.create!(
+        @product = Product.create!(
                           organization_id: 2,
                           oid:          params[:id],
                           name:         params[:name],
@@ -42,12 +42,12 @@ module WTK
                           wholesale:    params[:wholesale],
                           created_by:   3
                         )
+        present @product, :with => Entities::Product
       end
 
       
       desc "列出全部商品"
       get do
-        # Product.where(organization_id: 2)
         present Product.where(organization_id: 2), :with => Entities::Product
       end
 
@@ -64,6 +64,7 @@ module WTK
             error!('未找到指定的商品', 404)
           end
           #@org || error!('未找到对应的推客群', 404)
+          present @product, :with => Entities::Product
         end
       end
 
@@ -81,6 +82,7 @@ module WTK
       put ':id' do
       begin
         @product = Product.find_by(oid: params[:id])
+        present @product, :with => Entities::Product
         rescue ActiveRecord::RecordNotFound 
           error!('未找到指定的商品', 404)
         end
@@ -100,6 +102,7 @@ module WTK
       delete ':id' do
       begin
         @product = Product.find_by(oid: params[:id])
+        present @product, :with => Entities::Product
         rescue ActiveRecord::RecordNotFound 
           error!('未找到指定的商品', 404)
         end 
