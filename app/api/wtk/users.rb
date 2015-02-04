@@ -20,7 +20,7 @@ module WTK
   class Users < Grape::API
 
     resource :users do
-
+      # curl -X POST -H "Content-Type: application/json" localhost:3000/api/organizations -d '{"name":"TEST", "logo_url": "TEST", "contract": "TEST"}'
       desc "创建一个用户"
       params do
         requires :id, type: String, desc: "用户ID"
@@ -31,7 +31,7 @@ module WTK
         optional :phone, type: String, desc: "用户电话"
       end
       post do
-        @suer = User.create!(
+        user = User.create!(
                       oid:          params[:id],
                       name:         params[:name],
                       avatar_url:   params[:avatar_url], 
@@ -40,14 +40,14 @@ module WTK
                       password:     "123456",
                       password_confirmation: "123456"
                     )
-        present @user, :with => Entities::User
+        present user, :with => Entities::User
       end
 
       
       desc "列出全部用户"
       get do
-        @users = User.where.not(oid: nil)
-        present @users, :with => Entities::User
+        users = User.where.not(oid: nil)
+        present users, :with => Entities::User
       end
 
 
@@ -58,16 +58,16 @@ module WTK
       route_param :id do
         get do
         begin
-          @user = User.find_by(oid: params[:id])
-          present @user, :with => Entities::User
+          user = User.find_by(oid: params[:id])
+          present user, :with => Entities::User
           rescue ActiveRecord::RecordNotFound 
             error!('未找到指定的用户', 404)
           end
-          #@org || error!('未找到对应的推客群', 404)
+          # org || error!('未找到对应的推客群', 404)
         end
       end
 
-
+      # curl -X PUT -d '{"name": "MEEKET", "logo_url": "http:/c.360buyimg.com/lib/img/e/logo-201305.png"}' 'http://localhost:3000/api/organizations/1' -H Content-Type:application/json
       desc '修改指定的用户信息'
       params do
         requires :id, type: String, desc: "用户ID"
@@ -77,25 +77,25 @@ module WTK
       end
       put ':id' do
       begin
-        @user = User.find_by(oid: params[:id])       
+        user = User.find_by(oid: params[:id])       
         rescue ActiveRecord::RecordNotFound 
           error!('未找到指定的用户', 404)
         end 
-        @user.update_column :name, params[:name] if params[:name]
-        @user.update_column :avatar_url, params[:avatar_url] if params[:avatar_url]
-        present @user, :with => Entities::User
+        user.update_column :name, params[:name] if params[:name]
+        user.update_column :avatar_url, params[:avatar_url] if params[:avatar_url]
+        present user, :with => Entities::User
       end
 
-
+      # curl -X DELETE -v http://localhost:3000/api/organizations/3
       desc "删除指定用户"
       params do
         requires :id, type: String, desc: "用户ID"
       end
       delete ':id' do
       begin
-        @user = User.find_by(oid: params[:id])
-        present @user, :with => Entities::User
-        @user.destroy!
+        user = User.find_by(oid: params[:id])
+        present user, :with => Entities::User
+        user.destroy!
         rescue ActiveRecord::RecordNotFound 
           error!('未找到指定的用户', 404)
         end 

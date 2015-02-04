@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141010012217) do
     t.integer  "cart_id"
     t.integer  "order_id"
     t.integer  "quantity",   default: 1
+    t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

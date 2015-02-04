@@ -31,7 +31,7 @@ module WTK
         requires :wholesale, type: String, desc: "商品加盟价格"
       end
       post do
-        @product = Product.create!(
+        product = Product.create!(
                           organization_id: 2,
                           oid:          params[:id],
                           name:         params[:name],
@@ -42,7 +42,7 @@ module WTK
                           wholesale:    params[:wholesale],
                           created_by:   3
                         )
-        present @product, :with => Entities::Product
+        present product, :with => Entities::Product
       end
 
       
@@ -59,12 +59,12 @@ module WTK
       route_param :id do
         get do
         begin
-          @product = Product.find_by(oid: params[:id])
+          product = Product.find_by(oid: params[:id])
           rescue ActiveRecord::RecordNotFound 
             error!('未找到指定的商品', 404)
           end
-          #@org || error!('未找到对应的推客群', 404)
-          present @product, :with => Entities::Product
+          # org || error!('未找到对应的推客群', 404)
+          present product, :with => Entities::Product
         end
       end
 
@@ -81,18 +81,18 @@ module WTK
       end
       put ':id' do
       begin
-        @product = Product.find_by(oid: params[:id])
-        present @product, :with => Entities::Product
+        product = Product.find_by(oid: params[:id])
+        present product, :with => Entities::Product
         rescue ActiveRecord::RecordNotFound 
           error!('未找到指定的商品', 404)
         end
-        @product.name = params[:name] if params[:name]
-        @product.description = params[:description] if params[:description]
-        @product.image_url = params[:image] if params[:image]
-        @product.price = params[:price] if params[:price]
-        @product.retail = params[:retail] if params[:retail]
-        @product.wholesale = params[:wholesale] if params[:wholesale]
-        @product.save!
+        product.name = params[:name] if params[:name]
+        product.description = params[:description] if params[:description]
+        product.image_url = params[:image] if params[:image]
+        product.price = params[:price] if params[:price]
+        product.retail = params[:retail] if params[:retail]
+        product.wholesale = params[:wholesale] if params[:wholesale]
+        product.save!
       end
 
       desc "删除指定商品"
@@ -101,13 +101,13 @@ module WTK
       end
       delete ':id' do
       begin
-        @product = Product.find_by(oid: params[:id])
-        present @product, :with => Entities::Product
+        product = Product.find_by(oid: params[:id])
+        present product, :with => Entities::Product
         rescue ActiveRecord::RecordNotFound 
           error!('未找到指定的商品', 404)
         end 
         #authenticate!
-        @product.destroy!
+        product.destroy!
       end
 
     end
