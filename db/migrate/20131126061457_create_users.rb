@@ -2,6 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :oid
+      t.string :site
       t.string :name
       t.string :email
       t.string :phone
@@ -15,5 +16,6 @@ class CreateUsers < ActiveRecord::Migration
 
     add_index :users, :email, unique: true
     add_index :users, :remember_token
+    add_index :users, :oid
   end
 end

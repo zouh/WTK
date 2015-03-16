@@ -28,6 +28,9 @@ gem 'rack-cors'
 # 二维码
 gem 'rqrcode_png'
 
+# 微信
+gem 'weixin_rails_middleware'
+
 group :development, :test do
   gem 'sqlite3'
   # gem 'rspec-rails'

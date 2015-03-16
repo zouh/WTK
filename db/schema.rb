@@ -75,15 +75,17 @@ ActiveRecord::Schema.define(version: 20141010012217) do
     t.string   "logo_url"
     t.integer  "capacity"
     t.integer  "level"
-    t.decimal  "rate1",          default: 0.0
-    t.decimal  "rate2",          default: 0.0
-    t.decimal  "rate3",          default: 0.0
-    t.decimal  "rate4",          default: 0.0
-    t.decimal  "rate5",          default: 0.0
-    t.decimal  "rate6",          default: 0.0
+    t.decimal  "rate1",             default: 0.0
+    t.decimal  "rate2",             default: 0.0
+    t.decimal  "rate3",             default: 0.0
+    t.decimal  "rate4",             default: 0.0
+    t.decimal  "rate5",             default: 0.0
+    t.decimal  "rate6",             default: 0.0
     t.integer  "period"
-    t.integer  "members_count",  default: 0
-    t.integer  "products_count", default: 0
+    t.integer  "members_count",     default: 0
+    t.integer  "products_count",    default: 0
+    t.string   "weixin_secret_key"
+    t.string   "weixin_token"
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "created_at"
@@ -91,6 +93,8 @@ ActiveRecord::Schema.define(version: 20141010012217) do
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", unique: true
+  add_index "organizations", ["weixin_secret_key"], name: "index_organizations_on_weixin_secret_key"
+  add_index "organizations", ["weixin_token"], name: "index_organizations_on_weixin_token"
 
   create_table "products", force: :cascade do |t|
     t.integer  "organization_id"

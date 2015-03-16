@@ -16,12 +16,17 @@ class CreateOrganizations < ActiveRecord::Migration
       t.integer :period
       t.integer :members_count, default: 0
       t.integer :products_count, default: 0
+      t.string :weixin_secret_key
+      t.string :weixin_token
       t.integer :created_by
       t.integer :updated_by
 
       t.timestamps
     end
-
+    
     add_index :organizations, :name, unique: true
+    add_index :organizations, :weixin_secret_key
+    add_index :organizations, :weixin_token
+    
   end
 end

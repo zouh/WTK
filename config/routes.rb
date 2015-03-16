@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount WeixinRailsMiddleware::Engine, at: "/"
   get 'store/index', as: 'store'
 
   resources :users do
