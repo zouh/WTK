@@ -11,7 +11,7 @@ module UsersHelper
   end
 
   def qrcode_for(user, options = { size: 50 })
-    img_name = user.id.to_s + ".png"
+    img_name = "u" + user.id.to_s + ".png"
     invite_code = user.member.nil? ? "http://wtk.meeket.com/signup" : user.member.invite_code
     size = options[:size] * 3
     png = RQRCode::QRCode.new(invite_code, size: 4, level: :h).to_img.resize(size, size)

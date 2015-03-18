@@ -30,6 +30,9 @@
         </div>
         <p><%= sanitize(@product.description) %></p>
       </div>
+      <div class="col-md-6 col-md-offset-3">
+        <%= qrcode_for_product @product %>
+      </div>
   </div>
 </div>
 	

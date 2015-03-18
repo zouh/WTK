@@ -20,15 +20,15 @@
     </strong>
     伙伴
   </a>
-  <a href="<%= vips_organization_path(@organization) %>">
+  <!--<a href="<%= vips_organization_path(@organization) %>">
     <strong id="vips" class="stat">
       <%= @organization.registered_vips.count %>
     </strong>
     金牌会员
-  </a>
+  </a>-->
   <a href="<%= members_organization_path(@organization) %>">
     <strong id="members" class="stat">
-      <%= @organization.registered_members.count %>
+      <%= @organization.registered_members.count + @organization.registered_vips.count %>
     </strong>
     会员
   </a>

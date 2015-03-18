@@ -36,15 +36,16 @@ textarea {
   }
 }
 
-/*.badge {
+.badge {
   background-color: $brand-primary; //$gray-light;
 }
 .badge:empty {
   display: none;
 }
- /*a.label:hover,
+a.label:hover,
  a.badge:hover {
-   color: #ffffff;*/
+   color: #ffffff;
+}
 
 .nav-pills
 {
@@ -388,37 +389,4 @@ aside {
     margin-bottom: 5px;
   }
 }
-
-
-/* set the background-color to red */ 
-.navbar
-{
-  background-color: green; 
-}
-.navbar-inner
-{ 
-background-color: green; 
-/* remove the gradient */ 
-background-image: none; 
-/* set font color to white */ 
-color: lightgray; 
-} 
-
-/* set the background of the menu items to pink and default color to white */ 
-
-.navbar .nav > li > a { 
-color: white; 
-} 
-
-/* set hover and focus to lightblue */ 
-.navbar .nav > li > a:focus, 
-.navbar .nav > li > a:hover { 
-background-color: darkGreen; 
-color: white; 
-} 
-
-.navbar-default {
-  background-color: green;
-}
-
 
