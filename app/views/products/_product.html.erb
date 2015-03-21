@@ -10,9 +10,7 @@
       <% end %>
     </dl>
   </td>
-  <td>零售价：<%= number_to_currency(product.retail, unit: '¥') %></td>
-  <td>加盟价：<%= number_to_currency(product.wholesale, unit: '¥') %></td>
-  
+  <td><%= number_to_currency(product.price, unit: '¥ ') %></td>
   <% if (current_user.admin? || current_member.master?) %>
     <td>
       <%= link_to '查看', product_path(product) %><br>

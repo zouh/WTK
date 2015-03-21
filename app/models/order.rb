@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   scope :for_scoring, ->(member_id) {where("member_id = ? and status <> ?", member_id, Order.statuses[:completed])} 
   scope :by_organization, ->(org_id) {where(organization_id: org_id).order(created_at: :desc)} 
 
-  after_create :reward_following # 订单保存后计算各上级会员的奖励积分
+  after_create :reward_following # 订单保存后计算各上级会员的奖励返利
 
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
@@ -38,14 +38,14 @@ class Order < ActiveRecord::Base
         # 根据上级会员的角色和产品分成比例设置，计算上级会员分成
         member.ancestors.each do |m|
           rate = 0.0
-          if m.partner?
+          if m.partner? || m.angel?
             scale = member.depth - m.depth 
             rate = p.partner_rate[scale]
           elsif m.vip?
             rate = p.vip_rate
-          elsif m.angel?
-            rate = p.angel_rate
-          elsif m.member?
+          #elsif m.angel?
+          #  rate = p.angel_rate
+          elsif m.member? 
             rate = 0.0 
           elsif m.master?
             rate = 0.0                    

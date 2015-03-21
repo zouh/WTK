@@ -201,8 +201,8 @@ def make_organizations
   #product_name = Faker::Commerce.product_name
   meeket.products.create!(
                           name:        '技术服务费',
-                          description: '码客适合渠道模式、企业营销团队、连锁店等企业应用，支持单组织、多组织、跨组织的协同营销',
-                          image_url:   'http://www.meeket.com/images/img/img_cz02.jpg',
+                          description: '购买后成为码客的服务商，为客户提供专业的邀请函、商家名片、产品海报、活动促销、互动抽奖、优惠券等电子传单制作服务',
+                          image_url:   'http://www.meeket.com/images/common/logo.png',
                           price:       7000.00,
                           retail:      7000.00,
                           wholesale:   0.00,
@@ -217,11 +217,27 @@ def make_organizations
                         )
 
   meeket.products.create!(
-                          name:        '软件货款',
+                          name:        '码客企业版',
+                          description: '适合渠道模式、企业营销团队、连锁店等企业应用，支持单组织、多组织、跨组织的协同营销',
+                          image_url:   'http://www.meeket.com/images/img/img_cz02.jpg',
+                          price:       1000.00,
+                          retail:      1000.00,
+                          wholesale:   0.00,
+                          rate1:       30,
+                          rate2:       10,
+                          rate3:       0,
+                          rate4:       0,
+                          rate5:       0,
+                          rate6:       0,
+                          created_by:  master.id
+                        )
+
+  meeket.products.create!(
+                          name:        '码客个人版',
                           description: '适合直销经理、独立销售员、门店、小型网店等开展社交营销工作',
                           image_url:   'http://www.meeket.com/images/img/img_czdx.jpg',
-                          price:       3000.00,
-                          retail:      3000.00,
+                          price:       490.00,
+                          retail:      490.00,
                           wholesale:   0.00,
                           rate1:       30,
                           rate2:       10,

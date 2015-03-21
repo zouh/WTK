@@ -16,7 +16,7 @@
       <%= render 'stats' %>
     </section> 
     <section>
-      <span>销售收入：<%= number_to_currency(@organization.sales_total, unit: '¥') %></span>
+      <span>销售收入：<%= number_to_currency(@organization.sales_total, unit: '¥ ') %></span>
     </section>        
   </aside>
 
@@ -37,7 +37,7 @@
                 <td><%= order.created_at.strftime("%Y-%-m-%-d") %></td>
                 <td><%= link_to order.id.to_s, order %> 号订单</td>
                 <td><%= order.member.name %></td>
-                <td><strong><%= number_to_currency(order.total, unit: '¥') %></strong></td>
+                <td><strong><%= number_to_currency(order.total, unit: '¥ ') %></strong></td>
               </tr>
             <% end %>
           </ul>

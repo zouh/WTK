@@ -20,8 +20,8 @@
 				  <td><%= line_item.product.name %></td>
 				  <td>&times;</td>
 				  <td><%= line_item.quantity %></td>
-				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.product.price, unit: '¥') %></td>	  
-				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.total_price, unit: '¥') %></td>
+				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.product.price, unit: '¥ ') %></td>	  
+				  <td class="item_price">&nbsp;<%= number_to_currency(line_item.total_price, unit: '¥ ') %></td>
 				</tr> 
 			  <% end %>
 			  <tr>
@@ -29,7 +29,7 @@
 				<th></th>
 				<th></th>
 				<th></th>
-				<th><%= number_to_currency(@cart.total_price, unit: '¥') %></th>
+				<th><%= number_to_currency(@cart.total_price, unit: '¥ ') %></th>
 			  </tr>
 			</tbody>   
 		  </table>

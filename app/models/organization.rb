@@ -78,7 +78,7 @@ class Organization < ActiveRecord::Base
     # else
     #   sl = 0
     # end
-    return 3
+    return 2
   end
 
   def sales_total

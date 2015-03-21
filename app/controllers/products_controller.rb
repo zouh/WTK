@@ -7,11 +7,13 @@ class ProductsController < ApplicationController
   end
 
   def index
-    if current_user.admin?
-      @products = Product.paginate(page: params[:page])
-    else
-      org_id = current_user.member.nil? ? 0 : current_user.member.organization_id
-      @products = Product.by_organization(org_id).paginate(page: params[:page]) 
+    if !current_user.nil?
+      if current_user.admin?
+        @products = Product.paginate(page: params[:page])
+      else
+        org_id = current_user.member.nil? ? 0 : current_user.member.organization_id
+        @products = Product.by_organization(org_id).paginate(page: params[:page]) 
+      end
     end
   end
 

@@ -3,6 +3,12 @@
 
 <%= will_paginate previous_label: '上一页', next_label: '下一页' %>
 <table class="table table-striped">
+  <tr>
+    <th>商品</th>
+    <th>说明</th>
+    <th>价格</th>
+    <th>操作</th>
+  </tr>
   <tbody>
 	<ul class="products">
 	  <%= render @products %>

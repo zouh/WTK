@@ -118,7 +118,7 @@
   end
   
   def rewards
-    @title = "积分"
+    @title = "返利"
     @rewards = @member.rewards.order(created_at: :desc).paginate(page: params[:page])
     render 'show_rewards'
   end
