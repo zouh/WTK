@@ -2,7 +2,8 @@
   <%= gravatar_for user, size: 52 %>
   <%= link_to user.name, user %>
   <% if (current_user.admin? || current_member.master?) && !current_user?(user) %>
-    | <%= link_to "删除", user, method: :delete,
-                                  data: { confirm: "你确定吗?" } %>
+    | <%= link_to "删除", user, method: :delete, data: { confirm: "你确定吗?" } %>
   <% end %>
+  <br>推荐人：
+  <%= link_to user.parent_name, user.invited_by %>
 </li>

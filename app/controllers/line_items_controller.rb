@@ -26,7 +26,7 @@ class LineItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     @line_item = @cart.add_product(product.id)
-    
+
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to store_url }
@@ -39,9 +39,11 @@ class LineItemsController < ApplicationController
           status: :unprocessable_entity }
       end
     end
+
     # if @line_item.save
     #   @current_item = @line_item
     #   respond_with @cart
+    #   redirect_to root_path
     # end
   end
 

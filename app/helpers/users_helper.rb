@@ -7,6 +7,7 @@ module UsersHelper
     size = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
     name = user.nil? ? '' : user.name
+    gravatar_url = "https://dn-portal-files.qbox.me/sample1.jpg?imageView2/1/w/60/q/85"
     image_tag(gravatar_url, alt: name, class: "gravatar")
   end
 

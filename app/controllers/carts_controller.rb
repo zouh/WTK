@@ -2,9 +2,7 @@ class CartsController < ApplicationController
   include CurrentCart
 
   #skip_before_action :authorize, only: [:create, :update, :destroy]
-  before_action :set_cart
-  #before_action :set_cart_to_show,
-  #              only: [:set, :show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   # GET /carts
@@ -16,7 +14,6 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-  	 #@cart = Cart.find(params[:id])
   end
 
   # GET /carts/new
@@ -40,13 +37,13 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    cart = Cart.new(cart_params)
+    @cart = Cart.new(cart_params)
 
     respond_to do |format|
-      if cart.save
+      if @cart.save
         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render action: 'show', status: :created, location: cart }
-        set_current_cart cart
+        format.json { render action: 'show', status: :created, location: @cart }
+        #set_current_cart @cart
       else
         format.html { render action: 'new' }
         format.json { render json: cart.errors, status: :unprocessable_entity }
@@ -71,18 +68,14 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    @cart.destroy() if @cart.id == session[:cart_id]
+    @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
-    respond_to do |format|
-      format.html { redirect_to user_path }
-      format.js { render action: 'destroy'}
-      format.json { head :no_content }
-    end
+    redirect_to root_path
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_cart_to_show
+    def set_cart
       @cart = Cart.find(params[:id])
     end
 
@@ -94,6 +87,6 @@ class CartsController < ApplicationController
     def invalid_cart
       #notify_admin
       logger.error "Attempt to access invalid cart #{params[:id]}"
-      redirect_to store_url, notice: 'Invalid cart'
+      redirect_to root_path, notice: 'Invalid cart'
     end
 end

@@ -5,7 +5,7 @@ class Member < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :organization, counter_cache: true
-  belongs_to :invited_by_user, class_name: "User", foreign_key: "parent_id"
+  #belongs_to :invited_by, class_name: "Member", foreign_key: "parent_id"
 
   has_many :contacts
   has_many :orders
@@ -21,6 +21,14 @@ class Member < ActiveRecord::Base
     code = duration.map {|digit| mapping[digit].to_s }
     # code[7] = duration.fetch(7, '0')
     code.shuffle.join
+  end
+  
+  def parent_name
+    parent.nil? ? "" : parent.name
+  end
+
+  def invited_by_user
+    parent.nil? ? nil : parent.user
   end
 
   def score_up_points

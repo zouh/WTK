@@ -93,7 +93,7 @@ class Organization < ActiveRecord::Base
         self.capacity ||= 100 
         self.invite_code ||= ''
         self.level ||= 0
-        self.period ||= 3
+        self.period ||= 4
         self.rate1 ||= 0
         self.rate2 ||= 0
         self.rate3 ||= 0

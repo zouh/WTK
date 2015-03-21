@@ -38,6 +38,13 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def parent_name
+    member.nil? ? "" : member.parent_name
+  end
+
+  def invited_by
+    member.nil? ? nil : member.invited_by_user
+  end
   # def feed
   #   #Micropost.from_users_followed_by(self)
   # end

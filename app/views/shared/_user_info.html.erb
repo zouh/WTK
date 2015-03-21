@@ -1,11 +1,11 @@
-<a href="<%= user_path(current_user) %>">
-  <%= gravatar_for current_user, size: 52 %>
+<a href="<%= user_path(@user) %>">
+  <%= gravatar_for @user, size: 52 %>
 </a>
 <h1>
-  <%= current_user.name %>
+  <%= @user.name %>
 </h1>
 <span>
-  <%= link_to "修改帐户信息", edit_user_path(current_user) %>
+  <%= link_to "修改帐户信息", edit_user_path(@user) %>
 </span>
 
 <span>

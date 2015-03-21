@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   match '/docs',    to: 'static_pages#docs',    via: 'get'
 
   # # API config
-  mount API => '/'
+  #mount API => '/'
   
   # get 'docs', to: 'docs#index'
 

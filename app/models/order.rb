@@ -29,10 +29,15 @@ class Order < ActiveRecord::Base
       ids = Array.new
       # 以产品为主线，根据设置，计算上级会员应得的分成
       line_items.each do |l|
+        # 成为伙伴
         p = l.product
+        if p.qualify 
+          member.role = 4
+          member.save
+        end
         # 根据上级会员的角色和产品分成比例设置，计算上级会员分成
         member.ancestors.each do |m|
-          rate = 0
+          rate = 0.0
           if m.partner?
             scale = member.depth - m.depth 
             rate = p.partner_rate[scale]
@@ -41,9 +46,9 @@ class Order < ActiveRecord::Base
           elsif m.angel?
             rate = p.angel_rate
           elsif m.member?
-            rate = 0 
+            rate = 0.0 
           elsif m.master?
-            rate = 0                    
+            rate = 0.0                    
           end
           if rate > 0
             r = Reward.create!(
@@ -52,7 +57,7 @@ class Order < ActiveRecord::Base
                                 line_item_id: l.id,
                                 amount:       l.total_price,
                                 rate:         rate,
-                                points:       (l.total_profit * rate / 100).to_i,
+                                points:       (l.total_price * rate / 100.0).to_i,
                                 created_by:   member.user_id
                               )
             m.points += r.points

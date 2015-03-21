@@ -1,19 +1,11 @@
 <% provide(:title, @user.name) %>
 
-<% if current_user.admin? || current_member.master? %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-    </aside>
-  </div>
-<% else %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+    <% if !@user.admin? && !@user.member.master? %>
       <section>
         <%= render 'shared/user_stats' %>
       </section>
@@ -23,12 +15,13 @@
           <%= render @cart %>
         </div>
       </section>
-    </aside>
-    <div class="col-md-8">
-      <h3><%= @title %></h3>
-      <%= render 'shared/catalog' %>
-    </div>
+    <% end %>
+  </aside>
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <%= render 'shared/catalog' %>
   </div>
-<% end %>
+</div>
+
 
 	

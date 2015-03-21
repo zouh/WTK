@@ -1,10 +1,11 @@
  class UsersController < ApplicationController
     include CurrentCart
 
-  before_action :set_cart, only: [:create, :show]
-  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :correct_user,   only: [:show, :edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :set_cart,        only: [:create, :show]
+  before_action :signed_in_user,  only: [:index, :edit, :update, :destroy, :following, :followers, :orders, :rewards]
+  before_action :correct_user,    only: [:edit, :update]
+  before_action :admin_user,      only: :destroy
+  before_action :set_user,        only: [:show, :edit, :update, :destroy, :following, :followers, :orders, :rewards]
 
   def new
   	@user = User.new
@@ -20,14 +21,12 @@
   end
 
   def show
-    #if current_member.angel? 
-      #org_id = 0
-      org_id =  current_member.organization_id unless current_member.nil? 
+    if !@member.nil?
+      org_id =  @user.member.organization_id unless current_member.nil? 
       @title = '商品'
-      @user = current_user
       @products = Product.by_organization(org_id).paginate(page: params[:page])
-      @orders = current_user.member.orders.paginate(page: params[:page])
-    #end
+      @orders = @user.member.orders.paginate(page: params[:page])
+    end
   end
 
   def create
@@ -94,36 +93,33 @@
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @member.destroy unless @member.nil?
+    @user.destroy
     flash[:success] = "帐户已被删除！"
     redirect_to users_url
   end
 
   def following
     @title = "关注"
-    @user = User.find(params[:id])
     @users = @user.followed_users.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
     @title = "粉丝"
-    @user = current_user #User.find(params[:id])
-    @members = @user.member.followers.paginate(page: params[:page])
+    @members = @member.followers.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def orders
     @title = "订单"
-    @user = current_user
-    @orders = @user.member.orders_with_points.paginate(page: params[:page])
+    @orders = @member.orders_with_points.paginate(page: params[:page])
     render 'show_orders'
   end
   
   def rewards
     @title = "积分"
-    @user = current_user
-    @rewards = @user.member.rewards.order(created_at: :desc).paginate(page: params[:page])
+    @rewards = @member.rewards.order(created_at: :desc).paginate(page: params[:page])
     render 'show_rewards'
   end
 
@@ -131,6 +127,11 @@
 
     def user_params
       params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
+      @member = @user.member
     end
 
     # Before filters

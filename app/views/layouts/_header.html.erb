@@ -12,18 +12,19 @@
               <li><%= link_to "商品列表", products_path %></li>
             <% elsif current_member.master? %>
               <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  推客群 <b class="caret"></b>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">推客群 
+                  <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "查看", current_user.member.organization %></li>
-                  <li><%= link_to "设置", edit_organization_path(current_user.member.organization) %></li>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="presentation"><%= link_to "查看", current_user.member.organization %></li>
+                  <li role="presentation"><%= link_to "设置", edit_organization_path(current_user.member.organization) %></li>
+                  <!--<li class="divider"></li>-->
                 </ul>
               </li>
-              <li><%= link_to "推客列表", users_path %></li> 
-              <li><%= link_to "商品列表", products_path %></li>
-              <li><%= link_to "订单列表", orders_path %></li> 
-              <li><%= link_to "返利列表", rewards_path %></li>  
+              <li><%= link_to "推客成员", users_path %></li> 
+              <li><%= link_to "商品清单", products_path %></li>
+              <li><%= link_to "全部订单", orders_path %></li> 
+              <li><%= link_to "返利", rewards_path %></li>  
             <% else %>
               <li><%= link_to "商品", root_path %></li>
             <% end %>
