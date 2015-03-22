@@ -20,6 +20,7 @@
         <th>数量</th>
         <th>单价</th>
         <th>总价/总金额</th>
+        <th>状态</th>
       </tr>
       <% if @orders.any? %>
         <tbody>
@@ -32,6 +33,7 @@
                 <td></td>
                 <td></td>
                 <td><strong><%= number_to_currency(order.total, unit: '¥ ') %></strong></td>
+                <td><%= order.status_name %></td>
               </tr>
               <% order.line_items.each do |line_item| %>
                 <tr>
@@ -41,6 +43,7 @@
                   <td><%= line_item.quantity %></td>
                   <td class="item_price">&nbsp;<%= number_to_currency(line_item.product.price, unit: '¥ ') %></td>   
                   <td class="item_price">&nbsp;<%= number_to_currency(line_item.total_price, unit: '¥ ') %></td>
+                  <td></td>
                 </tr>
               <% end %>
             <% end %>

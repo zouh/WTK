@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
 
-  enum status:[ :placed, :paid, :confirmed, :delivered, :received, :completed ]
+  enum status: [ :placed, :paid, :confirmed, :delivered, :received, :completed ]
 
   belongs_to :organization
   belongs_to :member
@@ -20,6 +20,25 @@ class Order < ActiveRecord::Base
     cart.line_items.each do |item|
       item.cart_id = nil
       line_items << item
+    end
+  end
+
+  def status_name
+    case self.status
+      when "placed" then
+        "已下单"
+      when "paid"  then
+        "已付款"
+      when "confirmed" then
+        "已确认"
+      when "delivered" then
+        "已发货"
+      when "received" then
+        "已收货"
+      when "completed" then
+        "已完成"
+      else
+        ""
     end
   end
 

@@ -71,6 +71,7 @@ class Member < ActiveRecord::Base
       ids << m.id if m.depth - depth <= level
     end
     Member.where(id: ids)
+    #Member.includes("orders").includes("rewards").select("user_id, name, depth, ").where(id: ids)
   end
 
   def orders_with_points

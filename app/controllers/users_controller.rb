@@ -113,13 +113,14 @@
 
   def orders
     @title = "订单"
-    @orders = @member.orders_with_points.paginate(page: params[:page])
+    @orders = @member.orders.paginate(page: params[:page])
     render 'show_orders'
   end
   
   def rewards
     @title = "返利"
-    @rewards = @member.rewards.order(created_at: :desc).paginate(page: params[:page])
+    #@rewards = @member.rewards.order(created_at: :desc).paginate(page: params[:page])
+    @rewards = Reward.select("member_id, order_id, created_at, created_by, sum(amount) as amount, rate, sum(points) as points").where("member_id = ?", @member.id).group("member_id").group("order_id").order(created_at: :desc).paginate(page: params[:page])
     render 'show_rewards'
   end
 

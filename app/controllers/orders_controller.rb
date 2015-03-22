@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     @order.member_id = member.id
     @order.organization_id = member.organization_id
     @order.created_by = member.user_id
-    @order.status = 'placed'
+    @order.status = Order.statuses[:completed]
     @order.total = @cart.total_price
     @order.add_line_items_from_cart(@cart)
 

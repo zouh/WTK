@@ -25,8 +25,8 @@
         <th>姓名</th>
         <th>帐号</th>
         <th>级差</th>
-        <th>订单金额</th>
-        <th>返利</th>
+        <!--<th>订单金额</th>
+        <th>返利</th>-->
       </tr>
       <% if @members.any? %>
         <tbody>
@@ -37,8 +37,8 @@
                 <td><%= member.user.nil? ? '' : member.name %></td>
                 <td><%= member.user.nil? ? '' : member.user.email %></td>
                 <td><%= member.depth - @user.member.depth %></td>
-                <td></td>
-                <td></td>
+                <!--<td></td>
+                <td></td>-->
               </tr>
             <% end %>
           </ul>

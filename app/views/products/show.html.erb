@@ -14,7 +14,7 @@
       <div>
         <h3><%= @product.name %></h3>
         <div class="cart_line">
-          <% if !current_user.nil? && current_member.member? %>
+          <!--<% if !current_user.nil? && current_member.member? %>
             <% if @product.retail == @product.price %>
               <span class="price">零售价：<%= number_to_currency(@product.retail, unit: '¥ ') %></span><br>
             <% else %>
@@ -23,7 +23,8 @@
             <% end %>
           <% else %>
             <span class="price">加盟价：<%= number_to_currency(@product.wholesale, unit: '¥ ') %></span><br>
-          <% end %>
+          <% end %>-->
+          <span class="price">价格：<%= number_to_currency(@product.price, unit: '¥ ') %></span><br>
           <% if !current_user.nil? && (current_member.angel? || current_member.member?) %> 
             <%= button_to '加入购物车', line_items_path(product_id: @product), class: "btn btn-warning btn-xs", remote: true %>
           <% end %>

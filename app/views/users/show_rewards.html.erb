@@ -27,7 +27,8 @@
             <% @rewards.each do |reward| %>
               <tr>
                 <td><%= reward.created_at.strftime("%Y-%-m-%-d") %></td>
-                <td><%= link_to reward.order.id.to_s, reward.order %> 号订单</td>
+                <!--<td><%= link_to reward.order.id.to_s, reward.order %></td>-->
+                <td><%= reward.order.id.to_s %>
                 <td><%= reward.created_by_user.name %></td>
                 <td><%= number_to_currency(reward.amount, unit: '¥ ') %></td>
                 <td><%= reward.rate.to_s + ' %' %></td>
