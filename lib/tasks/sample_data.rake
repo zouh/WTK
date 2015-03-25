@@ -129,8 +129,8 @@ def make_organizations
                                   capacity:  100,
                                   period: 4,
                                   invite_code: Member.create_invite_code,
-                                  weixin_secret_key: '7c53e36511f32a2354f09edd6b538c93',
-                                  weixin_token: 'xlxepe1406793257',
+                                  weixin_secret_key: 'b41c825fdf3dd3e3d51a42a6526b50ff',
+                                  weixin_token: 'c9d856b5469fc63afa007f31',
                                   created_by: 1
                                 )
   # 创建码客群管理员

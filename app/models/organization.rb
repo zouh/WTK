@@ -1,6 +1,6 @@
 class Organization < ActiveRecord::Base
   # It will auto generate weixin token and secret
-  include WeixinRailsMiddleware::AutoGenerateWeixinTokenSecretKey
+  #include WeixinRailsMiddleware::AutoGenerateWeixinTokenSecretKey
 
   has_many :members, dependent: :destroy
   has_many :users, through: :members
