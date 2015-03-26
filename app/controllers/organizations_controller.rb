@@ -3,7 +3,7 @@ class OrganizationsController < ApplicationController
   #before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   #before_action :master_user,  only: [:edit, :update]
   #before_action :admin_user,     only: [:destroy]
-  before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  before_action :set_organization, only: [:show, :edit, :update, :destroy, :generate_menu]
 
   def new
     @organization = Organization.new
@@ -79,6 +79,15 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     @members = @organization.aviliible_invite_codes.paginate(page: params[:page])
     render 'show_members'
+  end
+
+  # 结合: https://github.com/lanrion/weixin_authorize(建议选用此gem的Redis存access_token方案)
+  def generate_menu
+    weixin_client = WeixinAuthorize::Client.new(@organization.app_key, @organization.app_secret)
+    menu   = @organization.build_menu
+    result = weixin_client.create_menu(menu)
+    set_error_message(result["errmsg"]) if result["errcode"] != 0
+    redirect_to organization_diymenus_path(@organization)
   end
 
   private

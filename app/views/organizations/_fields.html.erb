@@ -8,13 +8,7 @@
 	<%= f.text_field :contract, readonly: !current_user.admin?, class: "form-control" %>
 
 	<%= f.label :invite_code, '群管理员邀请码：', class: "control-label" %>
-	<%= f.text_field :invite_code, readonly: true, class: "form-control" %>
-
-	<%= f.label :weixin_token, '微信令牌：', class: "control-label" %>
-	<%= f.text_field :weixin_token, readonly: !current_user.admin?, class: "form-control" %>	
-
-	<%= f.label :weixin_secret_key, '微信应用密钥：', class: "control-label" %>
-	<%= f.text_field :weixin_secret_key, readonly: !current_user.admin?, class: "form-control" %>
+	<%= f.text_field :invite_code, readonly: true, class: "form-control" %>	
 
 	<% if !current_user.admin? && current_member.master? %>
 
@@ -26,6 +20,18 @@
 
 		<%= f.label :period, '返利结算周期：', class: "control-label" %>
 		<%= f.select :period, options_for_select({'天' => 1, '周' => 2, '月' => 3, '季度' => 4, '半年' => 5, '年' => 6}, 4) %>
+
+		<%= f.label :app_id, '应用ID：', class: "control-label" %>
+		<%= f.text_field :app_id, class: "form-control" %>
+
+		<%= f.label :weixin_secret_key, '微信应用密钥：', class: "control-label" %>
+		<%= f.text_field :weixin_secret_key, class: "form-control" %>
+
+		<%= f.label :weixin_token, '微信令牌：', class: "control-label" %>
+		<%= f.text_field :weixin_token, class: "form-control" %>	
+
+		<%= f.label :encoding_aes_key, '消息加解密密钥：', class: "control-label" %>
+		<%= f.text_field :encoding_aes_key, class: "form-control" %>
 		
 	<% end %>
  </div>

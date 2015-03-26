@@ -34,8 +34,8 @@ Rails.application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/docs',    to: 'static_pages#docs',    via: 'get'
 
-  # # API config
-  #mount API => '/'
+  # API config
+  mount API => '/'
   
   # get 'docs', to: 'docs#index'
 

@@ -131,6 +131,8 @@ def make_organizations
                                   invite_code: Member.create_invite_code,
                                   weixin_secret_key: 'b41c825fdf3dd3e3d51a42a6526b50ff',
                                   weixin_token: 'c9d856b5469fc63afa007f31',
+                                  encoding_aes_key: 'fXjEvuDa2dMdiV8NcLGTo0m5RrWQ88SUe1msBUBBqBM',
+                                  app_id: 'wxcc4c37da7948edc4',
                                   created_by: 1
                                 )
   # 创建码客群管理员
@@ -247,6 +249,15 @@ def make_organizations
                           rate6:       0,
                           created_by:  master.id
                         )
+
+  #创建微信DIY菜单
+  meeket.diymenus.create!(
+                          name:       '立即购买',
+                          key:        'WTK1001_BUY',
+                          url:        'http://wtk.meeket.com/products',
+                          is_show:    true,
+                          sort:       0
+                          )
 
   # # 创建绿尚群
   # gfa8 = Organization.create!(

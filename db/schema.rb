@@ -11,12 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010012217) do
+ActiveRecord::Schema.define(version: 20150326030723) do
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "diymenus", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "parent_id"
+    t.string   "name"
+    t.string   "key"
+    t.string   "url"
+    t.boolean  "is_show"
+    t.integer  "sort"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "diymenus", ["key"], name: "index_diymenus_on_key"
+  add_index "diymenus", ["organization_id"], name: "index_diymenus_on_organization_id"
+  add_index "diymenus", ["parent_id"], name: "index_diymenus_on_parent_id"
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "product_id"
@@ -75,17 +91,19 @@ ActiveRecord::Schema.define(version: 20141010012217) do
     t.string   "logo_url"
     t.integer  "capacity"
     t.integer  "level"
-    t.decimal  "rate1",             default: 0.0
-    t.decimal  "rate2",             default: 0.0
-    t.decimal  "rate3",             default: 0.0
-    t.decimal  "rate4",             default: 0.0
-    t.decimal  "rate5",             default: 0.0
-    t.decimal  "rate6",             default: 0.0
+    t.decimal  "rate1",                        default: 0.0
+    t.decimal  "rate2",                        default: 0.0
+    t.decimal  "rate3",                        default: 0.0
+    t.decimal  "rate4",                        default: 0.0
+    t.decimal  "rate5",                        default: 0.0
+    t.decimal  "rate6",                        default: 0.0
     t.integer  "period"
-    t.integer  "members_count",     default: 0
-    t.integer  "products_count",    default: 0
+    t.integer  "members_count",                default: 0
+    t.integer  "products_count",               default: 0
     t.string   "weixin_secret_key"
     t.string   "weixin_token"
+    t.string   "encoding_aes_key",  limit: 43
+    t.string   "app_id"
     t.integer  "created_by"
     t.integer  "updated_by"
     t.datetime "created_at"
@@ -141,6 +159,7 @@ ActiveRecord::Schema.define(version: 20141010012217) do
 
   create_table "users", force: :cascade do |t|
     t.string   "oid"
+    t.string   "site"
     t.string   "name"
     t.string   "email"
     t.string   "phone"
@@ -153,6 +172,7 @@ ActiveRecord::Schema.define(version: 20141010012217) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["oid"], name: "index_users_on_oid"
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

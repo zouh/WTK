@@ -18,6 +18,8 @@ class CreateOrganizations < ActiveRecord::Migration
       t.integer :products_count, default: 0
       t.string :weixin_secret_key
       t.string :weixin_token
+      t.string :encoding_aes_key, limit: 43
+      t.string :app_id
       t.integer :created_by
       t.integer :updated_by
 

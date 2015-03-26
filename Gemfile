@@ -30,6 +30,10 @@ gem 'rqrcode_png'
 
 # 微信
 gem 'weixin_rails_middleware'
+gem 'weixin_authorize'
+
+#使用Redis
+gem "redis-namespace"
 
 group :development, :test do
   gem 'sqlite3'
