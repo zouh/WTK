@@ -250,14 +250,14 @@ def make_organizations
                           created_by:  master.id
                         )
 
-  #创建微信DIY菜单
-  meeket.diymenus.create!(
-                          name:       '立即购买',
-                          key:        'WTK1001_BUY',
-                          url:        'http://wtk.meeket.com/products',
-                          is_show:    true,
-                          sort:       0
-                          )
+  # #创建微信DIY菜单
+  # meeket.diymenus.create!(
+  #                         name:       '立即购买',
+  #                         key:        'WTK1001_BUY',
+  #                         url:        'http://wtk.meeket.com/products',
+  #                         is_show:    true,
+  #                         sort:       0
+  #                         )
 
   # # 创建绿尚群
   # gfa8 = Organization.create!(

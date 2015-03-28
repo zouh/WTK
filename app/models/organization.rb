@@ -26,7 +26,7 @@ class Organization < ActiveRecord::Base
   #serialize :rates, Hash
 
   after_initialize :default_values
-  after_create :create_master
+  after_create :create_master, :create_weixin_diymenu
   after_save :create_invite_codes_for_angels
 
   def master
@@ -117,6 +117,7 @@ class Organization < ActiveRecord::Base
         self.invite_code ||= ''
         self.level ||= 0
         self.period ||= 4
+
         self.rate1 ||= 0
         self.rate2 ||= 0
         self.rate3 ||= 0
@@ -128,6 +129,17 @@ class Organization < ActiveRecord::Base
 
     def create_master
       members.create!(invite_code: self.invite_code, depth: 1)
+    end
+
+    def create_weixin_diymenu
+      key = 'organizations/' + id.to_s + '/products'
+      menu_products = diymenus.create!(
+                                        name:       '立即购买',
+                                        key:        key,
+                                        url:        'http://wtk.meeket.com/' + key,
+                                        is_show:    true,
+                                        sort:       0
+                                      )
     end
 
     def create_invite_codes_for_angels

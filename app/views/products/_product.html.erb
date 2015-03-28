@@ -4,14 +4,14 @@
     <dl>
       <dt><%= link_to product.name, product %></dt>
       <dd><%= truncate(strip_tags(product.description), length: 200) %></dd>
-      <% if current_user.admin? %>
+      <% if !current_user.nil? && current_user.admin? %>
         <br><br>
         <dt><%= link_to product.organization.name, product.organization %></dt>
       <% end %>
     </dl>
   </td>
   <td><%= number_to_currency(product.price, unit: '¥ ') %></td>
-  <% if (current_user.admin? || current_member.master?) %>
+  <% if !current_user.nil? && (current_user.admin? || current_member.master?) %>
     <td>
       <%= link_to '查看', product_path(product) %><br>
       <%= link_to '编辑', edit_product_path(product) %><br>

@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   end
 
   resources :organizations do
+    resources :products, shallow: true
     member do
       get :aviliible_invite_codes, :angels, :partners, :members, :vips
-    end
+    end  
   end
 
   resources :sessions,        only: [:new, :create, :destroy]

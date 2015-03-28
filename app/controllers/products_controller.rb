@@ -7,13 +7,21 @@ class ProductsController < ApplicationController
   end
 
   def index
-    if !current_user.nil?
-      if current_user.admin?
-        @products = Product.paginate(page: params[:page])
-      else
-        org_id = current_user.member.nil? ? 0 : current_user.member.organization_id
-        @products = Product.by_organization(org_id).paginate(page: params[:page]) 
+    @organization = params[:organization_id]
+    if @organization.nil?
+      # 管理员查看产品列表
+      if !current_user.nil?
+        if current_user.admin?
+          @products = Product.paginate(page: params[:page])
+        else
+          @organization = current_user.member.nil? ? 0 : current_user.member.organization_id
+          @products = Product.by_organization(@organization).paginate(page: params[:page]) 
+        end
       end
+    else
+      # 显示当前组织的产品列表
+      # 处理形式为http://localhost:3000/organizations/1/products的URL的路由
+      @products = Product.by_organization(@organization).paginate(page: params[:page]) 
     end
   end
 

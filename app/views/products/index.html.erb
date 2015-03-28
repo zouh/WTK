@@ -7,7 +7,9 @@
     <th>商品</th>
     <th>说明</th>
     <th>价格</th>
-    <th>操作</th>
+    <% if !current_user.nil? && !current_user.admin? && current_member.master? %>
+      <th>操作</th>
+    <% end %>
   </tr>
   <tbody>
 	<ul class="products">
@@ -16,7 +18,7 @@
   </tbody>
 </table>
 <%= will_paginate previous_label: '上一页', next_label: '下一页' %>
-<% if !current_user.admin? && current_member.master? %>
+<% if !current_user.nil? && !current_user.admin? && current_member.master? %>
   <p><%= link_to '新增', new_product_path %></p>
 <% end %>
 
