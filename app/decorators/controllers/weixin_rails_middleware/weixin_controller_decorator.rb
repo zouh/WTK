@@ -96,8 +96,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
     # 点击菜单拉取消息时的事件推送
     def handle_click_event
-      reply_text_message("你点击了: #{@keyword}")
+      #reply_text_message("你点击了: #{@keyword}")
       reply_text_message("http://wtk.meeket.com/#{@keyword}")
+      redirect_to  "http://wtk.meeket.com/#{@keyword}"
       #redirect_to organization_diymenus_path(@organization)
     end
 
