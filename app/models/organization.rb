@@ -140,6 +140,13 @@ class Organization < ActiveRecord::Base
                                         is_show:    true,
                                         sort:       0
                                       )
+      key = 'my_qrcode'
+      menu_qrcode = diymenus.create!(
+                                        name:       '我的二维码',
+                                        key:        key,
+                                        is_show:    true,
+                                        sort:       0
+                                      )
     end
 
     def create_invite_codes_for_angels
