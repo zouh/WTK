@@ -135,6 +135,9 @@ def make_organizations
                                   app_id: 'wxcc4c37da7948edc4',
                                   created_by: 1
                                 )
+
+  create_weixin_diymenu_for meeket
+
   # 创建码客群管理员
   master = User.find(2)
   mb = Member.find(1)
@@ -415,4 +418,22 @@ def make_organizations
   # #                              created_by: 1
   # #                             )
   # # end
+end
+
+def create_weixin_diymenu_for (organization) 
+  key = 'organizations/' + organization.id.to_s + '/products'
+  menu_products = organization.diymenus.create!(
+                                                  name:       '立即购买',
+                                                  key:        key,
+                                                  url:        'http://wtk.meeket.com/' + key,
+                                                  is_show:    true,
+                                                  sort:       0
+                                                )
+  key = 'my_qrcode'
+  menu_qrcode = organization.diymenus.create!(
+                                                name:       '我的二维码',
+                                                key:        key,
+                                                is_show:    true,
+                                                sort:       1
+                                              )
 end

@@ -132,21 +132,21 @@ class Organization < ActiveRecord::Base
     end
 
     def create_weixin_diymenu
-      key = 'organizations/' + id.to_s + '/products'
-      menu_products = diymenus.create!(
-                                        name:       '立即购买',
-                                        key:        key,
-                                        url:        'http://wtk.meeket.com/' + key,
-                                        is_show:    true,
-                                        sort:       0
-                                      )
-      key = 'my_qrcode'
-      menu_qrcode = diymenus.create!(
-                                        name:       '我的二维码',
-                                        key:        key,
-                                        is_show:    true,
-                                        sort:       0
-                                      )
+      # key = 'organizations/' + id.to_s + '/products'
+      # menu_products = diymenus.create!(
+      #                                   name:       '立即购买',
+      #                                   key:        key,
+      #                                   url:        'http://wtk.meeket.com/' + key,
+      #                                   is_show:    true,
+      #                                   sort:       0
+      #                                 )
+      # key = 'my_qrcode'
+      # menu_qrcode = diymenus.create!(
+      #                                   name:       '我的二维码',
+      #                                   key:        key,
+      #                                   is_show:    true,
+      #                                   sort:       1
+      #                                 )
     end
 
     def create_invite_codes_for_angels
