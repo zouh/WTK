@@ -424,7 +424,6 @@ def create_weixin_diymenu_for (organization)
   key = 'organizations/' + organization.id.to_s + '/products'
   menu_products = organization.diymenus.create!(
                                                   name:       '立即购买',
-                                                  key:        key,
                                                   url:        'http://wtk.meeket.com/' + key,
                                                   is_show:    true,
                                                   sort:       0
@@ -436,4 +435,5 @@ def create_weixin_diymenu_for (organization)
                                                 is_show:    true,
                                                 sort:       1
                                               )
+  organization.generate_weixin_menu
 end

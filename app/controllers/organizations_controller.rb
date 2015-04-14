@@ -81,14 +81,6 @@ class OrganizationsController < ApplicationController
     render 'show_members'
   end
 
-  # 结合: https://github.com/lanrion/weixin_authorize(建议选用此gem的Redis存access_token方案)
-  def generate_menu
-    weixin_client = WeixinAuthorize::Client.new(@organization.app_key, @organization.app_secret)
-    menu   = @organization.build_menu
-    result = weixin_client.create_menu(menu)
-    set_error_message(result["errmsg"]) if result["errcode"] != 0
-    redirect_to organization_diymenus_path(@organization)
-  end
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -26,7 +26,7 @@ class Organization < ActiveRecord::Base
   #serialize :rates, Hash
 
   after_initialize :default_values
-  after_create :create_master, :create_weixin_diymenu
+  after_create :create_master
   after_save :create_invite_codes_for_angels
 
   def master
@@ -109,6 +109,17 @@ class Organization < ActiveRecord::Base
     end
   end
 
+  def generate_weixin_menu
+    # 结合: https://github.com/lanrion/weixin_authorize(建议选用此gem的Redis存access_token方案)
+    weixin_client = WeixinAuthorize::Client.new(app_id, weixin_secret_key)
+    if weixin_client.is_valid?
+      menu = build_menu
+      result = weixin_client.create_menu(menu)
+      #logger.debug result["errmsg"] if result["errcode"] != 0
+    end
+    #redirect_to organization_diymenus_path(@organization)
+  end
+
   private
     def default_values
       if self.new_record?
@@ -129,24 +140,6 @@ class Organization < ActiveRecord::Base
 
     def create_master
       members.create!(invite_code: self.invite_code, depth: 1)
-    end
-
-    def create_weixin_diymenu
-      # key = 'organizations/' + id.to_s + '/products'
-      # menu_products = diymenus.create!(
-      #                                   name:       '立即购买',
-      #                                   key:        key,
-      #                                   url:        'http://wtk.meeket.com/' + key,
-      #                                   is_show:    true,
-      #                                   sort:       0
-      #                                 )
-      # key = 'my_qrcode'
-      # menu_qrcode = diymenus.create!(
-      #                                   name:       '我的二维码',
-      #                                   key:        key,
-      #                                   is_show:    true,
-      #                                   sort:       1
-      #                                 )
     end
 
     def create_invite_codes_for_angels
