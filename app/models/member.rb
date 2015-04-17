@@ -15,12 +15,11 @@ class Member < ActiveRecord::Base
   #default_scope { where('user_id is not null') }
 
   def self.create_invite_code
-    duration = self.duration_in_base35
-    #mapping ||= '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ'
-    mapping ||= '0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ'
+    duration = self.duration_in_base62
+    mapping ||= '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     code = duration.map {|digit| mapping[digit].to_s }
-    # code[7] = duration.fetch(7, '0')
-    code.shuffle.join
+    #code.shuffle.join
+    code.join
   end
   
   def parent_name
@@ -86,18 +85,18 @@ class Member < ActiveRecord::Base
 
   private
   	def self.epoch
-  		Time.new(2014, 8, 8)
+  		Time.new(2015, 4, 15).utc
   	end
 
-  	def self.duration_in_base35
-  	  time = Time.now
-	    num = (time.to_i - self.epoch.to_i) * 1000 + time.usec / 1000
+  	def self.duration_in_base62
+  	  time = Time.now.utc
+	    num = (time.to_i - self.epoch.to_i) * 1000000 + time.usec
       return [0] if num.zero?
       num = num.abs
       [].tap do |digits|
           while num > 0
-            digits.unshift num % 35
-            num /= 35
+            digits.unshift num % 62
+            num /= 62
           end
       end
  	end

@@ -56,15 +56,7 @@ class Organization < ActiveRecord::Base
 
 
   def rate
-    rate = Array.new(7, 0)
-    rate[0] = 100
-    rate[1] = rate1
-    rate[2] = rate2
-    rate[3] = rate3
-    rate[4] = rate4
-    rate[5] = rate5
-    rate[6] = rate6
-    return rate    
+    return 0    
   end
 
   def levels_for_scoring
@@ -115,7 +107,9 @@ class Organization < ActiveRecord::Base
     if weixin_client.is_valid?
       menu = build_menu
       result = weixin_client.create_menu(menu)
-      #logger.debug result["errmsg"] if result["errcode"] != 0
+      url = weixin_client.create_qr_limit_scene(scene_str: invite_code)
+      byebug
+      #Rails.logger.debug(result["errmsg"]) if result["errcode"] != 0
     end
     #redirect_to organization_diymenus_path(@organization)
   end
@@ -128,13 +122,6 @@ class Organization < ActiveRecord::Base
         self.invite_code ||= ''
         self.level ||= 0
         self.period ||= 4
-
-        self.rate1 ||= 0
-        self.rate2 ||= 0
-        self.rate3 ||= 0
-        self.rate4 ||= 0
-        self.rate5 ||= 0
-        self.rate6 ||= 0
       end
     end
 

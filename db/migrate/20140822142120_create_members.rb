@@ -2,7 +2,7 @@ class CreateMembers < ActiveRecord::Migration
   def change
     create_table :members do |t|
       t.integer :parent_id
-      t.references :organization, index: true
+      t.references  :organization, index: true
       t.string :invite_code
       t.references :user, index: true
       t.string :name

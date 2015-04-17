@@ -20,7 +20,7 @@ module ApplicationHelper
     codes = Array.new(options[:count], '')
     options[:count].times do |n|
     	num = to_base35(duration_in_milliseconds(options[:time]))
-    	#mapping ||= '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ'
+    	#mapping ||= '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       mapping ||= '0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ'
     	duration = num.map {|digit| mapping[digit].to_s }
       # code = Array.new(8, '0')
