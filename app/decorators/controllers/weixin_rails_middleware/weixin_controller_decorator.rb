@@ -89,7 +89,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       if weixin_client.is_valid?  
         user_info = weixin_client.user(openid)
       end    
-      reply_text_message("扫描带参数二维码事件: 2. 用户(#{user_info.nickname})已关注时的事件推送, keyword: #{@keyword}")
+      reply_text_message("扫描带参数二维码事件: 2. 用户(#{user_info.result[:nickname]})已关注时的事件推送, keyword: #{@keyword}")
     end
 
     def handle_location_event # 上报地理位置事件
