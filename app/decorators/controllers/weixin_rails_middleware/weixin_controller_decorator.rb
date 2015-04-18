@@ -84,12 +84,11 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
     # 扫描带参数二维码事件: 2. 用户已关注时的事件推送
     def handle_scan_event
-      weixin_client = WeixinAuthorize::Client.new(app_id, weixin_secret_key)
-      if weixin_client.is_valid?  
-        user_info = weixin_client.user('ot_JAs5Xv1QBVOtfOSP5O2Q5CI3g')
-        byebug
-      end    
-      reply_text_message(user_info.to_s + "扫描带参数二维码事件: 2. 用户已关注时的事件推送, keyword: #{@keyword}")
+      # weixin_client = WeixinAuthorize::Client.new(app_id, weixin_secret_key)
+      # if weixin_client.is_valid?  
+      #   user_info = weixin_client.user('ot_JAs5Xv1QBVOtfOSP5O2Q5CI3g')
+      # end    
+      reply_text_message("扫描带参数二维码事件: 2. 用户#{@weixin_message.FromUserName}已关注时的事件推送, keyword: #{@keyword}")
     end
 
     def handle_location_event # 上报地理位置事件
