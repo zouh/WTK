@@ -10,7 +10,7 @@ class CreateDiymenus < ActiveRecord::Migration
       t.integer :sort    # 排序功能
       t.timestamps null: false
     end
-    add_foreign_key :diymenus, :organizations
+    #add_foreign_key :diymenus, :organizations
 
     add_index :diymenus, :parent_id
     add_index :diymenus, :key
