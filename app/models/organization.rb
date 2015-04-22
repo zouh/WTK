@@ -104,14 +104,14 @@ class Organization < ActiveRecord::Base
   def generate_weixin_menu
     # 结合: https://github.com/lanrion/weixin_authorize(建议选用此gem的Redis存access_token方案)
     weixin_client = WeixinAuthorize::Client.new(app_id, weixin_secret_key)
-    byebug
+    # byebug
     if weixin_client.is_valid?
       menu = build_menu
       result = weixin_client.create_menu(menu)
       url = weixin_client.create_qr_limit_scene(scene_str: invite_code)
       user_info = weixin_client.user('ot_JAs5Xv1QBVOtfOSP5O2Q5CI3g')
-      #byebug
-      #Rails.logger.debug(result["errmsg"]) if result["errcode"] != 0
+      # byebug
+      # Rails.logger.debug(result["errmsg"]) if result["errcode"] != 0
     end
     #redirect_to organization_diymenus_path(@organization)
   end
