@@ -129,7 +129,7 @@ def make_organizations
                                   capacity:  100,
                                   period: 4,
                                   invite_code: Member.create_invite_code,
-                                  weixin_secret_key: 'b41c825fdf3dd3e3d51a42a6526b50ff',
+                                  weixin_secret_key: '0601b8947c0cac7d1680bb40b674a9c4',
                                   weixin_token: 'c9d856b5469fc63afa007f31',
                                   encoding_aes_key: 'fXjEvuDa2dMdiV8NcLGTo0m5RrWQ88SUe1msBUBBqBM',
                                   app_id: 'wxcc4c37da7948edc4',

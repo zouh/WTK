@@ -29,6 +29,7 @@ gem 'rack-cors'
 gem 'rqrcode_png'
 
 # 微信
+gem 'omniauth-wechat-oauth2'
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
 
