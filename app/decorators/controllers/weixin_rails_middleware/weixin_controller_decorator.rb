@@ -71,6 +71,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # 关注公众账号
     def handle_subscribe_event
       openid = @weixin_message.FromUserName
+      to_user = @weixin_message.ToUserName
       org = Organization.find(1)
       weixin_client = WeixinAuthorize::Client.new(org.app_id, org.weixin_secret_key)
       if weixin_client.is_valid?  
@@ -79,7 +80,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       nickname = user_info.result[:nickname] #unless user_info.nil?
       if @keyword.present?
         # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
-        return reply_text_message("扫描带参数二维码事件: 1. 用户(#{nickname})未关注时，进行关注后的事件推送, keyword: #{@keyword}")
+        return reply_text_message("扫描带参数二维码事件: 1. 用户(#{nickname})未关注#{to_user}时，进行关注后的事件推送, keyword: #{@keyword}")
       end
       reply_text_message("关注公众账号")
     end
@@ -92,13 +93,14 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # 扫描带参数二维码事件: 2. 用户已关注时的事件推送
     def handle_scan_event
       openid = @weixin_message.FromUserName
+      to_user = @weixin_message.ToUserName
       org = Organization.find(1)
       weixin_client = WeixinAuthorize::Client.new(org.app_id, org.weixin_secret_key)
       if weixin_client.is_valid?  
         user_info = weixin_client.user(openid)
       end 
       nickname = user_info.result[:nickname] #unless user_info.nil?
-      reply_text_message("扫描带参数二维码事件: 2. 用户(#{nickname})已关注时的事件推送, keyword: #{@keyword}")
+      reply_text_message("扫描带参数二维码事件: 2. 用户(#{nickname})已关注#{to_user}时的事件推送, keyword: #{@keyword}")
     end
 
     def handle_location_event # 上报地理位置事件

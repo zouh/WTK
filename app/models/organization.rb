@@ -110,8 +110,8 @@ class Organization < ActiveRecord::Base
       result = weixin_client.create_menu(menu)
       url = weixin_client.create_qr_limit_scene(scene_str: invite_code)
       user_info = weixin_client.user('ot_JAs5Xv1QBVOtfOSP5O2Q5CI3g')
-      # byebug
-      # Rails.logger.debug(result["errmsg"]) if result["errcode"] != 0
+      byebug
+      #  Rails.logger.debug(result["errmsg"]) if result["errcode"] != 0
     end
     #redirect_to organization_diymenus_path(@organization)
   end

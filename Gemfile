@@ -29,12 +29,15 @@ gem 'rack-cors'
 gem 'rqrcode_png'
 
 # 微信
-gem 'omniauth-wechat-oauth2'
+# gem 'omniauth-wechat-oauth2'
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
 
-#使用Redis
-gem "redis-namespace"
+# 使用Redis缓存
+# gem 'redis-namespace'
+# gem "redis-store"
+gem 'dalli'
+# gem 'kgio'
 
 group :development, :test do
   gem 'sqlite3'
